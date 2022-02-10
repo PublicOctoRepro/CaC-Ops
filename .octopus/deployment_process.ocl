@@ -25,3 +25,15 @@ step "Deploy a Package" {
         }
     }
 }
+
+step "Create Tenant Copy" {
+
+    action {
+        properties = {
+            CloneTenantStep_OctopusUrl = "#{if Octopus.Web.ServerUri}#{Octopus.Web.ServerUri}#{else}#{Octopus.Web.BaseUrl}#{/if}"
+            Octopus.Action.Template.Id = "ActionTemplates-904"
+            Octopus.Action.Template.Version = "0"
+        }
+        worker_pool = "Hosted Windows"
+    }
+}
